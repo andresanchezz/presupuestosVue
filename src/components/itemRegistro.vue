@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore()
@@ -26,12 +26,21 @@ const borrarRegistros =(registro)=>{
     store.commit('borrarRegistro', registro)
 }
 
-const fechaA = ref()
+let fechaA = ref()
 
 onMounted(()=>{
-    const fecha = new Date()
-    fechaA.value = fecha.toLocaleString()
+    
+    let fecha = new Date()
+    let fechaActual = fecha.toLocaleString()
+
+    if(!fechaA){
+        fechaA = fechaActual
+    }else{
+        fechaA = fechaA
+    }
+
 })
+
 
 </script>
 

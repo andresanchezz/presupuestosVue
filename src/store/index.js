@@ -11,7 +11,6 @@ const store = createStore({
 
     mutations:{
         agregarRegistro(state, registro){   
-
             if(registro.operador === '+'){
                 (registro.valor>0)
                 ? ''
@@ -26,24 +25,47 @@ const store = createStore({
 
             state.total.push(registro)
             console.log(state.total);
+
+            this.commit('storage')
+
         },
 
         borrarRegistro(state, registro){
 
             if(registro.operador === '+'){
                 let index = state.ingresos.indexOf(registro)
-                state.ingresos.splice(index, 1)
+                state.ingresos.splice(index, 1);
             }else{
                 let index = state.egresos.indexOf(registro)
-                state.egresos.splice(index, 1)
+                state.egresos.splice(index, 1);
             }
-            
             let index = state.total.indexOf(registro)
-            state.total.splice(index, 1)
+            state.total.splice(index, 1);
+
+            this.commit('storage')
+
         },
 
         cambiarColor(state){
             state.darkTheme = !state.darkTheme
+        },
+
+        storage(state){
+            (localStorage.setItem("data", JSON.stringify(state.total)));
+            (localStorage.setItem("dataI", JSON.stringify(state.ingresos)));
+            (localStorage.setItem("dataE", JSON.stringify(state.egresos)));
+        },
+
+        recuperarDatos(state){
+
+            let dataInStorage = JSON.parse(localStorage.getItem("data"));
+            (dataInStorage) ? state.total = dataInStorage : state.total = state.total
+
+            let dataInStorageI = JSON.parse(localStorage.getItem("dataI"));
+            (dataInStorageI) ? state.ingresos = dataInStorageI : state.ingresos = state.ingresos
+
+            let dataInStorageE = JSON.parse(localStorage.getItem("dataE"));
+            (dataInStorageE) ? state.egresos = dataInStorageE : state.egresos = state.egresos
         }
 
     },

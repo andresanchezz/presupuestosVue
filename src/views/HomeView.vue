@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import presupuestoTotal from '../components/presupuestoTotal.vue';
 import agregarValores from '../components/agregarValores.vue';
@@ -49,6 +49,10 @@ import itemRegistro from '../components/itemRegistro.vue';
 
 const store = useStore()
 const registros = computed(() => store.state.total)
+
+onMounted(()=>{
+    store.commit('recuperarDatos')
+})
 
 
 </script>
