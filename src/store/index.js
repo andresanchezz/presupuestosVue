@@ -28,6 +28,19 @@ const store = createStore({
             console.log(state.total);
         },
 
+        borrarRegistro(state, registro){
+
+            if(registro.operador === '+'){
+                let index = state.ingresos.indexOf(registro)
+                state.ingresos.splice(index, 1)
+            }else{
+                let index = state.egresos.indexOf(registro)
+                state.egresos.splice(index, 1)
+            }
+            
+            let index = state.total.indexOf(registro)
+            state.total.splice(index, 1)
+        },
 
         cambiarColor(state){
             state.darkTheme = !state.darkTheme

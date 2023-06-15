@@ -1,10 +1,10 @@
 <template>
     <tr>
-        <td><span>{{item}}</span></td>
-        <td>{{valor.toLocaleString("es-CO", {style: "currency", currency: "COP"})}}</td>
+        <td><span>{{registro.item}}</span></td>
+        <td>{{registro.valor.toLocaleString("es-CO", {style: "currency", currency: "COP"})}}</td>
         <td>{{fechaA}}</td>
         <td>
-            <i class="fa-solid fa-trash"></i>
+            <i class="fa-solid fa-trash" @click="borrarRegistros(registro)"></i>
         </td>
     </tr>
 </template>
@@ -15,12 +15,16 @@ import { useStore } from 'vuex';
 
 const store = useStore()
 
-const props = defineProps({
-    item:String,
-    valor:Number,
+defineProps({
+    registro:{
+        type:Object,
+        required:true
+    }
 })
 
-
+const borrarRegistros =(registro)=>{
+    store.commit('borrarRegistro', registro)
+}
 
 const fechaA = ref()
 

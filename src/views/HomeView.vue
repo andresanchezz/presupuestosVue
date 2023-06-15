@@ -3,6 +3,7 @@
         <presupuestoTotal />
         <agregarValores />
         <div class="registro">
+
             <div class="ingresos">
                 <h3>Ingresos</h3>
                 <div>
@@ -13,8 +14,9 @@
                             <th>Fecha</th>
                             <th>x</th>
                         </tr>
-                        <itemRegistro v-for="registro in registros" :key="registro.item" :item="registro.item"
-                            :valor="registro.valor" v-show="registro.valor > 0" />
+                        <itemRegistro v-for="registro in registros" :key="registro.item"  
+                    :registro="registro"
+                    v-show="registro.valor > 0" />
                     </table>
                 </div>
             </div>
@@ -28,8 +30,9 @@
                         <th>Fecha</th>
                         <th>x</th>
                     </tr>
-                    <itemRegistro v-for="registro in registros" :key="registro.item" :item="registro.item"
-                        :valor="registro.valor"  v-show="registro.valor < 0" />
+                    <itemRegistro v-for="registro in registros" :key="registro.item"  
+                    :registro="registro"
+                    v-show="registro.valor < 0" />
                 </table>
             </div>
 
